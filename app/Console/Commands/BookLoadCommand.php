@@ -3,9 +3,11 @@
 namespace App\Console\Commands;
 
 use App\Facades\BookFacade;
+use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Resources\BookListResource;
 use App\Models\Book;
 use Illuminate\Console\Command;
+use Illuminate\Validation\Validator;
 
 class BookLoadCommand extends Command
 {
@@ -31,6 +33,8 @@ class BookLoadCommand extends Command
         $data = file_get_contents(__DIR__ . '/book.json');
         $data = json_decode($data, true);
 
+        $request = new StoreBookRequest($data);
+        $request->setValidator(Validator::make($data,$request->rules()));
         $book = new Book($data);
         dd($book);
     }
