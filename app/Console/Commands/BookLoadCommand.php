@@ -36,8 +36,9 @@ class BookLoadCommand extends Command
 
         $request = new StoreBookRequest($data);
         $request->setValidator(Validator::make($data,$request->rules()));
-        $books = new Book($data);
-        $collectionBooks=collect($books);
+        $book = new Book($data);
+        $array_fore_create_collection=$book->toArray();
+        $collectionBooks=collect($array_fore_create_collection);
         dump($collectionBooks);
     }
 }
