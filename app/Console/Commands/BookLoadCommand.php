@@ -7,7 +7,8 @@ use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Resources\BookListResource;
 use App\Models\Book;
 use Illuminate\Console\Command;
-use Illuminate\Validation\Validator;
+use Validator;
+
 
 class BookLoadCommand extends Command
 {
@@ -35,7 +36,9 @@ class BookLoadCommand extends Command
 
         $request = new StoreBookRequest($data);
         $request->setValidator(Validator::make($data,$request->rules()));
-        $book = new Book($data);
-        dd($book);
+        $books = new Book($data);
+        $collectionBooks=collect($books);
+        dump($collectionBooks);
     }
 }
+
