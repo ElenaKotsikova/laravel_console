@@ -22,4 +22,5 @@ class CreateBookData extends Data
     public array|Optional $images;
 
     public int $author_id;
+    public int $publisher_id;
 }

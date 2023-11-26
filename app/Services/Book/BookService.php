@@ -51,6 +51,7 @@ class BookService
                 'title' => request()->input('title'),
                 'page_number' => request()->integer('page_number'),
                 'annotation' => request()->input('annotation'),
+                'publisher_id' => request()->integer('publisher_id'),
                 'author_id' => request()->integer('author_id'),
             ];
         } else {
@@ -62,6 +63,9 @@ class BookService
             }
             if (request()->has('annotation')) {
                 $data['annotation'] = request()->input('annotation');
+            }
+            if (request()->has('publisher_id')) {
+                $data['publisher_id'] = request()->integer('publisher_id');
             }
             if (request()->has('author_id')) {
                 $data['author_id'] = request()->integer('author_id');

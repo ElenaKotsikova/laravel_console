@@ -6,8 +6,9 @@ use App\Facades\BookFacade;
 use App\Http\Requests\Book\StoreBookRequest;
 use App\Http\Resources\BookListResource;
 use App\Models\Book;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Console\Command;
-use Validator;
+
 
 
 class BookLoadCommand extends Command
@@ -36,10 +37,10 @@ class BookLoadCommand extends Command
 
         $request = new StoreBookRequest($data);
         $request->setValidator(Validator::make($data,$request->rules()));
-        $book = new Book($data);
-        $array_fore_create_collection=$book->toArray();
-        $collectionBooks=collect($array_fore_create_collection);
-        dump($collectionBooks);
+        $book = BookFacade::store(
+            $request->data()
+        );
+         dd($book);
     }
 }
 
